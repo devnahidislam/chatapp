@@ -1,11 +1,23 @@
 import express from 'express';
 import cors from 'cors';
-const app = express();
-
-app.use(cors());
+import helmet from 'helmet';
+import morgan from 'morgan';
+import userRoute from './routes/users.js';
+import authRoute from './routes/auth.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+app.use(helmet());
+app.use(morgan('common'));
+app.use(cors());
+
+app.use('/api/users', userRoute);
+app.use('/api/auth', authRoute);
 
 import connectDB from './config/db.js';
 connectDB();
