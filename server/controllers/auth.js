@@ -24,8 +24,12 @@ export const login = async (req, res, next) => {
     const isCorrect = await bcrypt.compare(req.body.password, user.password);
     if (!isCorrect) return next(createError(401, 'Incorrect password.'));
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT);
     const { password, ...others } = user._doc;
+
+    const token = jwt.sign(
+      { id: user._id, admin: user.isAdmin },
+      process.env.JWT
+    );
 
     res
       .cookie('access_token', token, {
