@@ -24,7 +24,7 @@ export const verifyUser = (req, res, next) => {
       if (req.params.id === req.user.id || req.user.admin) {
         next();
       } else {
-        return next(createError(403, 'You are not authenticated user.'));
+        return next(createError(403, 'You are not authorized.'));
       }
     });
   } else {
