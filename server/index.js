@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import postRoute from './routes/posts.js';
 import userRoute from './routes/users.js';
 import authRoute from './routes/auth.js';
 import cookieParser from 'cookie-parser';
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
+app.use('/api/posts', postRoute);
 
 import connectDB from './config/db.js';
 connectDB();
