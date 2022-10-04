@@ -3,8 +3,37 @@ import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+import { useEffect, useState, useRef } from 'react';
+
+const useClickOutside = (handler) => {
+  const domNode = useRef();
+
+  useEffect(() => {
+    let menuHandler = (event) => {
+      if (!domNode.current.contains(event.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener('mousedown', menuHandler);
+  });
+  return domNode;
+};
 
 const Topbar = () => {
+  const [open, setOpen] = useState(false);
+  const toggle = () => setOpen((open) => !open);
+
+  const domNode = useClickOutside(() => {
+    setOpen(false);
+  });
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -35,8 +64,41 @@ const Topbar = () => {
             <span className="topbarIconBadge">5</span>
           </div>
         </div>
-        <div className="avatar">
-          <img src="/assets/person/1.jpeg" alt="" className="topbarImg" />
+        <div className="avatar" ref={domNode}>
+          <div className="menuToggle" onClick={() => toggle()}>
+            <img
+              src="/assets/person/1.jpeg"
+              alt="avatar"
+              className="topbarImg"
+            />
+            <div className="profileBadge">
+              <KeyboardArrowDownIcon className="badgeIcon" />
+            </div>
+          </div>
+          {open && (
+            <div className="menu">
+              <div className="profile">
+                <img src="/assets/person/1.jpeg" alt="avatar" />
+                Nahid Islam
+              </div>
+              <div className="menuOption">
+                <SettingsOutlinedIcon fontSize="small" />
+                Settings & Privacy
+              </div>
+              <div className="menuOption">
+                <HelpOutlineIcon fontSize="small" />
+                Help & Support
+              </div>
+              <div className="menuOption">
+                <FeedbackOutlinedIcon fontSize="small" />
+                Give Feedback
+              </div>
+              <div className="menuOption">
+                <LogoutIcon fontSize="small" />
+                Log Out
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
