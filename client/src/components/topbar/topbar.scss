@@ -1,0 +1,119 @@
+.topbarContainer {
+  display: flex;
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: #1877f2;
+
+  .topbarLeft {
+    flex: 3;
+
+    .logo {
+      font-size: 24px;
+      margin-left: 20px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  .topbaCenter {
+    flex: 5;
+
+    .searchbar {
+      width: 100%;
+      height: 30px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      background-color: white;
+
+      .searchIcon {
+        margin: 0 5px 0 10px;
+      }
+      .serarchInput {
+        border: none;
+        width: 100%;
+        background: transparent;
+      }
+      .serarchInput:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .topbarRight {
+    flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+
+    .topbarLinks {
+      display: flex;
+      gap: 10px;
+
+      .topbarLink {
+        font-size: 15px;
+        padding: 5px;
+        background-color: #4897fe;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+    .topbarIcons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+
+      .topbarIconItem {
+        cursor: pointer;
+        background-color: #4897fe;
+        padding: 5px 6px;
+        border-radius: 50%;
+        position: relative;
+
+        &:hover {
+          background-color: #4f91e9;
+        }
+
+        .topbarIconBadge {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          font-weight: bold;
+          height: 15px;
+          width: 15px;
+          border-radius: 50%;
+          color: white;
+          background-color: rgb(183, 61, 61);
+          position: absolute;
+          top: -5px;
+          right: -5px;
+        }
+      }
+    }
+
+    .avatar {
+      height: 32px;
+      width: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #999;
+      border-radius: 50%;
+
+      .topbarImg {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #999;
+        cursor: pointer;
+      }
+    }
+  }
+}
