@@ -1,0 +1,63 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 5px;
+}
+
+.sidebar {
+  flex: 3;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+
+  .sidebarWrapper {
+    padding: 10px;
+
+    .sidebarList {
+      .padding-0 {
+        padding: 2px !important;
+      }
+
+      .sidebarListItem {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 5px;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.2s;
+        scroll-snap-align: center;
+
+        .sidebarImg {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          object-fit: cover;
+          background: #999;
+        }
+
+        &:hover {
+          background-color: #f1f1f1;
+        }
+
+        .sidebarListItemIcon {
+          color: #1877f2;
+        }
+        .sidebarListItemText {
+          font-weight: 500;
+          color: #505050;
+        }
+      }
+
+      .sidebarHr {
+        margin: 15px 0;
+      }
+    }
+  }
+}

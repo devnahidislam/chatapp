@@ -1,16 +1,20 @@
-import React from 'react';
+import './home.scss';
 import HomeIcon from '@mui/icons-material/Home';
 import { IconButton } from '@mui/material';
 import Topbar from './../../components/topbar/Topbar';
+import Sidebar from './../../components/sidebar/Sidebar';
+import Feed from '../../components/feed/Feed';
+import Rightbar from '../../components/rightbar/Rightbar';
 
 const Home = () => {
   return (
     <>
       <Topbar />
-      <IconButton>
-        <HomeIcon color="primary" fontSize="large" />
-      </IconButton>
-      Home page.
+      <div className="homeContainer">
+        <Sidebar />
+        <Feed />
+        <Rightbar />
+      </div>
     </>
   );
 };
