@@ -67,7 +67,7 @@ const Topbar = () => {
         <div className="avatar" ref={domNode}>
           <div className="menuToggle" onClick={() => toggle()}>
             <img
-              src="/assets/person/1.jpeg"
+              src="/assets/person/2.jpeg"
               alt="avatar"
               className="topbarImg"
             />
@@ -78,7 +78,7 @@ const Topbar = () => {
           {open && (
             <div className="menu">
               <div className="profile">
-                <img src="/assets/person/1.jpeg" alt="avatar" />
+                <img src="/assets/person/2.jpeg" alt="avatar" />
                 Nahid Islam
               </div>
               <div className="menuOption">

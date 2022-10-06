@@ -1,19 +1,21 @@
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-  background: gray;
-  border-radius: 5px;
-}
-
 .sidebar {
   flex: 3;
   height: calc(100vh - 50px);
+  position: sticky;
+  top: 50px;
   overflow-y: scroll;
   scroll-snap-type: y proximity;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #cacaca;
+    border-radius: 5px;
+  }
 
   .sidebarWrapper {
     padding: 10px;
@@ -53,10 +55,6 @@
           font-weight: 500;
           color: #505050;
         }
-      }
-
-      .sidebarHr {
-        margin: 15px 0;
       }
     }
   }

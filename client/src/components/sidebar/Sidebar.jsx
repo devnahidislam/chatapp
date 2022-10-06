@@ -65,7 +65,7 @@ const Sidebar = () => {
             <SchoolIcon className="sidebarListItemIcon" />
             <span className="sidebarListItemText">Courses</span>
           </li>
-          <hr className='sidebarHr'/>
+          <hr />
           <li className="sidebarListItem padding-0">
             <img
               src="/assets/person/1.jpeg"
