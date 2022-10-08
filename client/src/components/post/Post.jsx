@@ -1,20 +1,23 @@
 import './post.scss';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { IconButton } from '@mui/material';
+import { Users } from '../../dummyData.js';
 
-const Post = () => {
+const Post = ({post}) => {
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
             <img
-              src="/assets/person/2.jpeg"
+              src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
               alt="avatar"
               className="profileImg"
             />
-            <span className="userName">Nahid Islam</span>
-            <span className="postDate">2 minute ago</span>
+            <span className="userName">
+              {Users.filter((u) => u.id === post?.userId)[0].username}
+            </span>
+            <span className="postDate">{post.date}</span>
           </div>
           <div className="postTopRight">
             <IconButton color="default" aria-label="More">
@@ -23,8 +26,8 @@ const Post = () => {
           </div>
         </div>
         <div className="postCenter">
-          <div className="postText">Hey, It's my first post:)</div>
-          <img src="/assets/post/3.jpeg" alt="avatar" className="postImg" />
+          <div className="postText">{post.desc}</div>
+          <img src={post.photo} alt="postPic" className="postImg" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
