@@ -9,6 +9,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import WorkHistoryOutlinedIcon from '@mui/icons-material/WorkHistoryOutlined';
 import EventIcon from '@mui/icons-material/Event';
 import SchoolIcon from '@mui/icons-material/School';
+import { Users } from '../../dummyData';
 
 const Sidebar = () => {
   return (
@@ -19,7 +20,7 @@ const Sidebar = () => {
             <HomeIcon className="sidebarListItemIcon" />
             <span className="sidebarListItemText">Home</span>
           </li>
-          <li className="sidebarListItem padding-0">
+          <li className="sidebarListItem">
             <img
               src="/assets/person/2.jpeg"
               alt="avatar"
@@ -66,78 +67,18 @@ const Sidebar = () => {
             <span className="sidebarListItemText">Courses</span>
           </li>
           <hr />
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/1.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">Jecika Chan</span>
-          </li>
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">John Smith</span>
-          </li>
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/3.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">Monica Moni</span>
-          </li>
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/4.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">Arina Orin</span>
-          </li>
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/5.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">Jerry Joee</span>
-          </li>
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/5.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">Jerry Joee</span>
-          </li>
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/5.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">Jerry Joee</span>
-          </li>
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/5.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">Jerry Joee</span>
-          </li>
-          <li className="sidebarListItem padding-0">
-            <img
-              src="/assets/person/5.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText">Jerry Joee</span>
-          </li>
+
+          {Users.map((user) => (
+            <li key={user.id} className="sidebarListItem">
+              <img
+                src={user.profilePicture}
+                alt="avatar"
+                className="sidebarImg"
+              />
+              <span className="sidebarListItemText">{user.username}</span>
+            </li>
+          ))}
+
         </ul>
       </div>
     </div>

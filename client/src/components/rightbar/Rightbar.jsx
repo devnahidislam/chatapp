@@ -3,6 +3,8 @@ import { IconButton } from '@mui/material';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Users } from '../../dummyData';
+import Online from '../online/Online';
 
 const Rightbar = () => {
   return (
@@ -29,106 +31,10 @@ const Rightbar = () => {
               </IconButton>
             </div>
           </div>
-          <ul className="rightbarFriendsList">
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/1.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Jahid Hasan</div>
-            </li>
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/4.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Arina Eric</div>
-            </li>
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/6.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Mery Lee</div>
-            </li>
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/7.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Anjelina Joli</div>
-            </li>
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/8.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Jara Mehbub</div>
-            </li>
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/8.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Jara Mehbub</div>
-            </li>
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/8.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Jara Mehbub</div>
-            </li>
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/8.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Jara Mehbub</div>
-            </li>
-            <li className="rightbarFriend">
-              <div className="rightbarFriendImgContainer">
-                <img
-                  src="/assets/person/8.jpeg"
-                  alt="avatar"
-                  className="friendImg"
-                />
-                <div className="activeStatus"></div>
-              </div>
-              <div className="rightbarUsername">Jara Mehbub</div>
-            </li>
+          <ul>
+            {Users.map((u) => (
+              <Online key={u.id} user={u} />
+            ))}
           </ul>
         </div>
       </div>
