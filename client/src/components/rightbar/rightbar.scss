@@ -42,5 +42,52 @@
         justify-content: space-between;
       }
     }
+
+    .rightbarTitle {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .rightbarInfo {
+      margin-bottom: 20px;
+
+      .rightbarInfoItem {
+        margin-bottom: 5px;
+
+        .rightbarInfoKey {
+          font-weight: 500;
+          margin-right: 5px;
+          color: #555;
+        }
+        .rightbarInfoValue {
+          font-weight: 300;
+        }
+      }
+    }
+    .rightbarFollowings {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .rightbarFollowing {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+
+        .rightbarFollowingImg {
+          height: 90px;
+          width: 90px;
+          object-fit: cover;
+          border-radius: 5px;
+          margin-bottom: 3px;
+          cursor: pointer;
+        }
+        .rightbarFollowingName {
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }

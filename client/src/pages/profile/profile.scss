@@ -5,7 +5,6 @@
     flex: 9;
 
     .profileRightTop {
-
       .profileCover {
         height: 380px;
         position: relative;
@@ -37,16 +36,58 @@
           .profileInfoDesc {
             font-weight: 300;
           }
-          .friendsProfiles{
+          .myActionButtons {
             display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-top: 5px;
 
-            .friendsProfilePic{
-              height: 32px;
-              width: 32px;
-              object-fit: cover;
-              border-radius: 50%;
-              cursor: pointer;
+            .friendsProfiles {
+              position: relative;
+
+              .friendsProfilePic {
+                height: 32px;
+                width: 32px;
+                object-fit: cover;
+                border-radius: 50%;
+                position: absolute;
+                border: 2px solid white;
+                cursor: pointer;
+                top: -10px;
+
+                &:nth-child(2) {
+                  left: 25px;
+                }
+                &:nth-child(3) {
+                  left: 50px;
+                }
+                &:nth-child(4) {
+                  left: 75px;
+                }
+                &:nth-child(5) {
+                  left: 100px;
+                }
+              }
+            }
+            .myActionRightBtn {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              margin-right: 10px;
+
+              .addStoryBtn {
+                display: flex;
+                align-items: center;
+                gap: 3px;
+                padding: 8px 10px;
+                border-radius: 5px;
+                color: white;
+                background: #2374e1;
+                cursor: pointer;
+              }
+              .editProfile {
+                background: #7d7d7d;
+              }
             }
           }
         }
