@@ -10,26 +10,34 @@ import WorkHistoryOutlinedIcon from '@mui/icons-material/WorkHistoryOutlined';
 import EventIcon from '@mui/icons-material/Event';
 import SchoolIcon from '@mui/icons-material/School';
 import { Users } from '../../dummyData';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
         <ul className="sidebarList">
-          <li className="sidebarListItem">
-            <HomeIcon className="sidebarListItemIcon" />
-            <span className="sidebarListItemText">Home</span>
-          </li>
-          <li className="sidebarListItem">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="avatar"
-              className="sidebarImg"
-            />
-            <span className="sidebarListItemText" style={{ fontWeight: '500' }}>
-              Nahid Islam
-            </span>
-          </li>
+          <Link to={'/'}>
+            <li className="sidebarListItem">
+              <HomeIcon className="sidebarListItemIcon" />
+              <span className="sidebarListItemText">Home</span>
+            </li>
+          </Link>
+          <Link to={'/profile'}>
+            <li className="sidebarListItem">
+              <img
+                src="/assets/person/2.jpeg"
+                alt="avatar"
+                className="sidebarImg"
+              />
+              <span
+                className="sidebarListItemText"
+                style={{ fontWeight: '500' }}
+              >
+                Nahid Islam
+              </span>
+            </li>
+          </Link>
           <li className="sidebarListItem">
             <RssFeedIcon className="sidebarListItemIcon" />
             <span className="sidebarListItemText">Feed</span>
@@ -78,7 +86,6 @@ const Sidebar = () => {
               <span className="sidebarListItemText">{user.username}</span>
             </li>
           ))}
-
         </ul>
       </div>
     </div>

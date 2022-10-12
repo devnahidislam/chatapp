@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import MapsUgcOutlinedIcon from '@mui/icons-material/MapsUgcOutlined';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
@@ -10,6 +11,7 @@ import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const useClickOutside = (handler) => {
   const domNode = useRef();
@@ -77,10 +79,12 @@ const Topbar = () => {
           </div>
           {open && (
             <div className="menu">
-              <div className="profile">
-                <img src="/assets/person/2.jpeg" alt="avatar" />
-                Nahid Islam
-              </div>
+              <Link to={'/profile'}>
+                <div className="profile">
+                  <img src="/assets/person/2.jpeg" alt="avatar" />
+                  Nahid Islam
+                </div>
+              </Link>
               <div className="menuOption">
                 <SettingsOutlinedIcon fontSize="small" />
                 Settings & Privacy
@@ -93,10 +97,24 @@ const Topbar = () => {
                 <FeedbackOutlinedIcon fontSize="small" />
                 Give Feedback
               </div>
-              <div className="menuOption">
-                <LogoutIcon fontSize="small" />
-                Log Out
-              </div>
+              <Link to={'/register'}>
+                <div className="menuOption">
+                  <LoginIcon fontSize="small" />
+                  Register
+                </div>
+              </Link>
+              <Link to={'/login'}>
+                <div className="menuOption">
+                  <LoginIcon fontSize="small" />
+                  Log In
+                </div>
+              </Link>
+              <Link to={'/login'}>
+                <div className="menuOption">
+                  <LogoutIcon fontSize="small" />
+                  Log Out
+                </div>
+              </Link>
             </div>
           )}
         </div>
