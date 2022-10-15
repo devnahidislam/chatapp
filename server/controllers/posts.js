@@ -94,7 +94,7 @@ export const timelinePost = async (req, res, next) => {
         return Post.find({ userId: friendId });
       })
     );
-    if (userPosts) {
+    if (!userPosts) {
       res.status(403).send('No post available.');
     }
     res.status(200).json(userPosts.concat(...friendsPosts));

@@ -20,6 +20,6 @@ router.put('/:id/:pid/like', verifyUser, likePost);
 router.get('/:pid', getPost);
 
 // Get Timeline posts
-router.get('/:id/timeline', verifyUser, timelinePost);
+router.get('/timeline/:id', verifyUser, timelinePost);
 
 export default router;

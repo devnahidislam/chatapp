@@ -1,7 +1,24 @@
+import { useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './login.scss';
+import { AuthContext } from './../../context/AuthContext';
+import { loginCall } from './../../apiCalls';
+import { CircularProgress } from '@mui/material';
 
 const Login = () => {
+  const email = useRef();
+  const password = useRef();
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    loginCall(
+      { email: email.current.value, password: password.current.value },
+      dispatch
+    );
+    console.log(user);
+  };
+
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -12,14 +29,29 @@ const Login = () => {
           </span>
         </div>
         <div className="loginRight">
-          <div className="loginBox">
-            <input type="email" placeholder="Email" className="loginInput" />
+          <form className="loginBox" onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Email"
+              className="loginInput"
+              ref={email}
+              required
+            />
             <input
               type="password"
               placeholder="Password"
               className="loginInput"
+              minLength={6}
+              ref={password}
+              required
             />
-            <button className="loginBtn">Log In</button>
+            <button className="loginBtn" type="submit" disabled={isFetching}>
+              {isFetching ? (
+                <CircularProgress sx={{ color: 'white' }} size={30} />
+              ) : (
+                'Log In'
+              )}
+            </button>
             <span className="forgotPassword">Forgot password?</span>
             <hr />
             <div className="loginRegister">
@@ -27,7 +59,7 @@ const Login = () => {
                 <button className="loginRegisterBtn">Create new account</button>
               </Link>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

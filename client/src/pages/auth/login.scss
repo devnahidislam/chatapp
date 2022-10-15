@@ -70,6 +70,9 @@
           &:hover {
             background: #0061df;
           }
+          &:disabled{
+            cursor: progress;
+          }
         }
         .forgotPassword {
           text-align: center;
