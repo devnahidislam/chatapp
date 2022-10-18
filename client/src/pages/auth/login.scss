@@ -41,7 +41,8 @@
         flex-direction: column;
         justify-content: space-around;
 
-        .loginInput {
+        .loginInput,
+        .inputError {
           height: 50px;
           border-radius: 6px;
           border: 1px solid gray;
@@ -56,6 +57,17 @@
             color: #a4a4a4;
           }
         }
+        .inputError {
+          border: 1px solid red;
+
+          &:focus {
+            border: 1px solid red;
+          }
+        }
+        .error{
+          font-size: 14px;
+          color: red;
+        }
         .loginBtn {
           height: 50px;
           border-radius: 10px;
@@ -69,6 +81,10 @@
 
           &:hover {
             background: #0061df;
+          }
+
+          &:disabled{
+            cursor: not-allowed;
           }
         }
         .forgotPassword {
