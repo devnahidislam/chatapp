@@ -1,23 +1,44 @@
-import { useRef, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import './login.scss';
-import { AuthContext } from './../../context/AuthContext';
-import { loginCall } from './../../apiCalls';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
+import { loginSchema } from '../../schema';
 import { CircularProgress } from '@mui/material';
+import { loginFailed, loginStart, loginSuccess } from '../../redux/userSlice';
 
-const Login = (e) => {
-  const email = useRef();
-  const password = useRef();
-  const { isFetching, dispatch } = useContext(AuthContext);
+const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    loginCall(
-      { email: email.current.value, password: password.current.value },
-      dispatch
-    );
+  const onSubmit = async (values) => {
+    dispatch(loginStart());
+    try {
+      const res = await axios.post('/auth/login', values);
+      dispatch(loginSuccess(res.data));
+      res.status === 200 && navigate('/');
+    } catch (error) {
+      dispatch(loginFailed());
+    }
   };
 
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    isValid,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: loginSchema,
+    onSubmit,
+  });
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -28,24 +49,40 @@ const Login = (e) => {
           </span>
         </div>
         <div className="loginRight">
-          <form className="loginBox" onSubmit={handleLogin}>
+          <form onSubmit={handleSubmit} autoComplete="off" className="loginBox">
             <input
               type="email"
+              id="email"
               placeholder="Email"
-              className="loginInput"
-              ref={email}
-              required
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.email && touched.email ? 'inputError' : 'loginInput'
+              }
             />
+            {errors.email && touched.email && (
+              <p className="error">{errors.email}</p>
+            )}
             <input
               type="password"
+              id="password"
               placeholder="Password"
-              className="loginInput"
-              minLength={6}
-              ref={password}
-              required
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.password && touched.password
+                  ? 'inputError'
+                  : 'loginInput'
+              }
             />
-            <button className="loginBtn" type="submit" disabled={isFetching}>
-              {isFetching ? (
+            {errors.password && touched.password && (
+              <p className="error">{errors.password}</p>
+            )}
+
+            <button className="loginBtn" disabled={!isValid} type="submit">
+              {isSubmitting ? (
                 <CircularProgress sx={{ color: 'white' }} size={30} />
               ) : (
                 'Log In'
