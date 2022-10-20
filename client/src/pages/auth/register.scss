@@ -18,29 +18,14 @@
       justify-content: center;
 
       .registerBox {
-        height: 500px;
+        height: 400px;
         padding: 20px;
         background: white;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-around;
 
-        .registerInput {
-          height: 50px;
-          border-radius: 6px;
-          border: 1px solid gray;
-          font-size: 17px;
-          padding-left: 10px;
-
-          &:focus {
-            outline: none;
-            border: 1px solid #1877f2;
-          }
-          &::placeholder {
-            color: #a4a4a4;
-          }
-        }
         .registerBtn {
           height: 40px;
           border-radius: 10px;
@@ -55,8 +40,13 @@
           &:hover {
             background: #0061df;
           }
+
+          &:disabled {
+            cursor: not-allowed;
+          }
         }
         .forgotPassword {
+          margin-top: 5px;
           color: #555;
 
           .registerLoginLink {

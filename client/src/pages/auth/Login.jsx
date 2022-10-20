@@ -4,18 +4,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { loginSchema } from '../../schema';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, TextField, Tooltip, Zoom } from '@mui/material';
 import { loginFailed, loginStart, loginSuccess } from '../../redux/userSlice';
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, actions) => {
     dispatch(loginStart());
     try {
       const res = await axios.post('/auth/login', values);
       dispatch(loginSuccess(res.data));
+      actions.resetForm();
       res.status === 200 && navigate('/');
     } catch (error) {
       dispatch(loginFailed());
@@ -50,36 +51,54 @@ const Login = () => {
         </div>
         <div className="loginRight">
           <form onSubmit={handleSubmit} autoComplete="off" className="loginBox">
-            <input
-              type="email"
-              id="email"
-              placeholder="Email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.email && touched.email ? 'inputError' : 'loginInput'
+            <Tooltip
+              title={
+                errors.email &&
+                touched.email && <p className="error">{errors.email}</p>
               }
-            />
-            {errors.email && touched.email && (
-              <p className="error">{errors.email}</p>
-            )}
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={
-                errors.password && touched.password
-                  ? 'inputError'
-                  : 'loginInput'
+              placement="top"
+              open={true}
+              TransitionComponent={Zoom}
+              arrow
+            >
+              <TextField
+                id="email"
+                label="Email"
+                variant="outlined"
+                size="small"
+                margin="dense"
+                type="email"
+                autoComplete="email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.email && touched.email}
+              />
+            </Tooltip>
+
+            <Tooltip
+              title={
+                errors.password &&
+                touched.password && <p className="error">{errors.password}</p>
               }
-            />
-            {errors.password && touched.password && (
-              <p className="error">{errors.password}</p>
-            )}
+              placement="top"
+              open={true}
+              TransitionComponent={Zoom}
+              arrow
+            >
+              <TextField
+                id="password"
+                label="Password"
+                variant="outlined"
+                size="small"
+                margin="dense"
+                type="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.password && touched.password}
+              />
+            </Tooltip>
 
             <button className="loginBtn" disabled={!isValid} type="submit">
               {isSubmitting ? (

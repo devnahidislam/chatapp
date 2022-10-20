@@ -9,9 +9,10 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
 import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/userSlice';
 
 const useClickOutside = (handler) => {
   const domNode = useRef();
@@ -35,6 +36,15 @@ const Topbar = () => {
   const domNode = useClickOutside(() => {
     setOpen(false);
   });
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setOpen(false);
+    navigate('/login');
+  };
 
   return (
     <div className="topbarContainer">
@@ -97,24 +107,16 @@ const Topbar = () => {
                 <FeedbackOutlinedIcon fontSize="small" />
                 Give Feedback
               </div>
-              <Link to={'/register'}>
-                <div className="menuOption">
-                  <LoginIcon fontSize="small" />
-                  Register
-                </div>
-              </Link>
               <Link to={'/login'}>
                 <div className="menuOption">
                   <LoginIcon fontSize="small" />
                   Log In
                 </div>
               </Link>
-              <Link to={'/login'}>
-                <div className="menuOption">
-                  <LogoutIcon fontSize="small" />
-                  Log Out
-                </div>
-              </Link>
+              <div onClick={handleLogout} className="menuOption">
+                <LogoutIcon fontSize="small" />
+                Log Out
+              </div>
             </div>
           )}
         </div>
