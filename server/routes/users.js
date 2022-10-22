@@ -11,7 +11,7 @@ router.put('/:id', verifyUser, update);
 router.delete('/:id', verifyUser, deleteUser);
 
 // Get Users
-router.get('/:id', verifyUser, getUser);
+router.get('/:id', getUser);
 
 // Follow
 router.put('/:id/:fid/follow', verifyUser, follow);

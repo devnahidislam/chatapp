@@ -22,11 +22,12 @@
           height: 32px;
           border-radius: 50%;
           object-fit: cover;
-          background: #999;
+          background: #e6e6e6;
           cursor: pointer;
         }
         .userName {
           font-weight: 500;
+          text-transform: capitalize;
           cursor: pointer;
         }
         .postDate {

@@ -11,7 +11,7 @@ import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/userSlice';
 
 const useClickOutside = (handler) => {
@@ -45,6 +45,8 @@ const Topbar = () => {
     setOpen(false);
     navigate('/login');
   };
+
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <div className="topbarContainer">
@@ -92,7 +94,7 @@ const Topbar = () => {
               <Link to={'/profile'}>
                 <div className="profile">
                   <img src="/assets/person/2.jpeg" alt="avatar" />
-                  Nahid Islam
+                  {currentUser?.username}
                 </div>
               </Link>
               <div className="menuOption">
