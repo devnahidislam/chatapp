@@ -2,22 +2,28 @@ import Post from '../post/Post';
 import Share from '../share/Share';
 import './feed.scss';
 import { Posts } from '../../dummyData';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { fetchStart, fetchSuccess } from '../../redux/postSlice';
 
 const Feed = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get(`/posts/timeline/${currentUser?._id}`);
-      setPosts(res.data);
-      console.log(res);
+      const timelinePosts = await axios.get(
+        `/posts/timeline/${currentUser?._id}`
+      );
+      setPosts(timelinePosts.data);
+      
+      dispatch(fetchStart());
+      dispatch(fetchSuccess(timelinePosts.data));
     };
     fetchPosts();
-  }, []);
+  }, [currentUser?._id, dispatch]);
 
   return (
     <div className="feed">

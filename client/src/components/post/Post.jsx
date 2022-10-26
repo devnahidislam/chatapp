@@ -4,14 +4,16 @@ import { IconButton } from '@mui/material';
 import { Users } from '../../dummyData';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchSuccess } from '../../redux/postSlice';
 
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const Post = ({ post }) => {
   const [like, setLike] = useState(post.likes?.length);
   const [isLiked, setIsLiked] = useState(false);
+  const dispatch = useDispatch();
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -22,12 +24,20 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users/${post?.userId}`);
-      setUser(res.data);
-      console.log(res.data);
+      try {
+        const currentPost = await axios.get(`/users/${post?.userId}`);
+        setUser(currentPost.data);
+        dispatch(fetchSuccess(currentPost.data));
+
+        console.log(currentPost.data);
+      } catch (error) {}
     };
     fetchUser();
-  }, []);
+  }, [post?.userId, dispatch]);
+
+  // const handleLike = async () => {};
+  // handleLike();
+  // const handleDislike = () => {};
 
   return (
     <div className="post">
