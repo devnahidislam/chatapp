@@ -5,8 +5,12 @@ import Feed from './../../components/feed/Feed';
 import Rightbar from './../../components/rightbar/Rightbar';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { useSelector } from 'react-redux';
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const Profile = () => {
+    const { currentUser } = useSelector((state) => state.user);
+
   return (
     <>
       <Topbar />
@@ -22,11 +26,17 @@ const Profile = () => {
               />
               <img
                 className="profileUserImg"
-                src="assets/person/2.jpeg"
+                src={
+                  currentUser.profilePic
+                    ? PF + currentUser.profilePic
+                    : PF + 'person/noAvatar.png'
+                }
                 alt=""
               />
               <div className="profileInfo">
-                <h4 className="profileInfoName">Nahid Islam</h4>
+                <h4 className="profileInfoName">
+                  {currentUser?.username || 'No User'}
+                </h4>
                 <span className="profileInfoDesc">Hi friend...</span>
                 <div className="myActionButtons">
                   <div className="friendsProfiles">
@@ -72,7 +82,7 @@ const Profile = () => {
           </div>
           <div className="profileRightBotton">
             <Feed />
-            <Rightbar profile/>
+            <Rightbar profile />
           </div>
         </div>
       </div>

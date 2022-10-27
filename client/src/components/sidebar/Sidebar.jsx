@@ -11,8 +11,12 @@ import EventIcon from '@mui/icons-material/Event';
 import SchoolIcon from '@mui/icons-material/School';
 import { Users } from '../../dummyData';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const Sidebar = () => {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -26,7 +30,11 @@ const Sidebar = () => {
           <Link to={'/profile'}>
             <li className="sidebarListItem">
               <img
-                src="/assets/person/2.jpeg"
+                src={
+                  currentUser.profilePic
+                    ? PF + currentUser.profilePic
+                    : PF + 'person/noAvatar.png'
+                }
                 alt="avatar"
                 className="sidebarImg"
               />
@@ -34,7 +42,7 @@ const Sidebar = () => {
                 className="sidebarListItemText"
                 style={{ fontWeight: '500' }}
               >
-                Nahid Islam
+                {currentUser?.username || 'No User'}
               </span>
             </li>
           </Link>

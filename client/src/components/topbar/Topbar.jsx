@@ -13,6 +13,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/userSlice';
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const useClickOutside = (handler) => {
   const domNode = useRef();
@@ -81,7 +82,11 @@ const Topbar = () => {
         <div className="avatar" ref={domNode}>
           <div className="menuToggle" onClick={() => toggle()}>
             <img
-              src="/assets/person/2.jpeg"
+              src={
+                currentUser
+                  ? PF + currentUser?.profilePic
+                  : PF + 'person/noAvatar.png'
+              }
               alt="avatar"
               className="topbarImg"
             />
@@ -93,8 +98,15 @@ const Topbar = () => {
             <div className="menu">
               <Link to={'/profile'}>
                 <div className="profile">
-                  <img src="/assets/person/2.jpeg" alt="avatar" />
-                  {currentUser?.username}
+                  <img
+                    src={
+                      currentUser.profilePic
+                        ? PF + currentUser.profilePic
+                        : PF + 'person/noAvatar.png'
+                    }
+                    alt="avatar"
+                  />
+                  {currentUser?.username || 'No User'}
                 </div>
               </Link>
               <div className="menuOption">

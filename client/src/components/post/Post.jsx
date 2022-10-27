@@ -4,20 +4,21 @@ import { IconButton } from '@mui/material';
 import { Users } from '../../dummyData';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchSuccess } from '../../redux/postSlice';
+import { format } from 'timeago.js';
 
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const Post = ({ post }) => {
-  const [like, setLike] = useState(post.likes?.length);
-  const [isLiked, setIsLiked] = useState(false);
-  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
 
   const likeHandler = () => {
-    setLike(isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
+    try {
+      axios.put(`/posts/${currentUser._id}/${post._id}/like`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [user, setUser] = useState({});
@@ -25,19 +26,12 @@ const Post = ({ post }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const currentPost = await axios.get(`/users/${post?.userId}`);
-        setUser(currentPost.data);
-        dispatch(fetchSuccess(currentPost.data));
-
-        console.log(currentPost.data);
+        const timelinePostOwner = await axios.get(`/users/${post?.userId}`);
+        setUser(timelinePostOwner.data);
       } catch (error) {}
     };
     fetchUser();
-  }, [post?.userId, dispatch]);
-
-  // const handleLike = async () => {};
-  // handleLike();
-  // const handleDislike = () => {};
+  }, [post?.userId]);
 
   return (
     <div className="post">
@@ -54,7 +48,7 @@ const Post = ({ post }) => {
             <Link to={'/profile'}>
               <span className="userName">{user.username || 'Username'}</span>
             </Link>
-            <span className="postDate">{post.date}</span>
+            <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
             <IconButton color="default" aria-label="More">
@@ -74,7 +68,7 @@ const Post = ({ post }) => {
             <IconButton color="default" aria-label="Love" onClick={likeHandler}>
               <img className="likeBtn" src="assets/heart.png" alt="Love" />
             </IconButton>
-            <span className="likeCounter">{like}</span>
+            <span className="likeCounter">{post.likes.length}</span>
           </div>
           <div className="postBottomRight">
             <span className="postComments">{post.comment} Comments</span>

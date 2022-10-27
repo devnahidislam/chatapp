@@ -37,6 +37,10 @@
           margin-left: 10px;
           background: transparent;
           outline: none;
+
+          &::placeholder{
+            text-transform: capitalize;
+          }
         }
       }
     }

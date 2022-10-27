@@ -2,16 +2,28 @@ import './share.scss';
 import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import PermMediaIcon from '@mui/icons-material/PermMedia';
 import MoodIcon from '@mui/icons-material/Mood';
+import { useSelector } from 'react-redux';
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const Share = () => {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img src="/assets/person/2.jpeg" alt="avatar" className="shareImg" />
+          <img
+            src={
+              currentUser.profilePic
+                ? PF + currentUser.profilePic
+                : PF + 'person/noAvatar.png'
+            }
+            alt="avatar"
+            className="shareImg"
+          />
           <div className="shareInputContainer">
             <input
-              placeholder="What's on your mind, Nahid?"
+              placeholder={"What's on your mind, " + currentUser?.username +' ?'}
               className="shareInput"
             />
           </div>

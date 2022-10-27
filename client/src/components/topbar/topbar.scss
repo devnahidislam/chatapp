@@ -126,15 +126,15 @@
 
       .profileBadge {
         position: absolute;
-        right: -4px;
-        bottom: -4px;
+        right: -5px;
+        bottom: -2px;
         height: 15px;
         width: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background-color: rgba(174, 174, 174, 0.7);
+        background-color: rgba(174, 174, 174, 0.8);
 
         .badgeIcon {
           font-size: 16px !important;
