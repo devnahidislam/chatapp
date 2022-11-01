@@ -31,7 +31,7 @@ const Sidebar = () => {
             <li className="sidebarListItem">
               <img
                 src={
-                  currentUser.profilePic
+                  currentUser?.profilePic
                     ? PF + currentUser.profilePic
                     : PF + 'person/noAvatar.png'
                 }

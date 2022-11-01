@@ -5,7 +5,7 @@ import { Posts } from '../../dummyData';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { fetchStart, fetchSuccess } from '../../redux/postSlice';
+import { fetchFailed, fetchStart, fetchSuccess } from '../../redux/postSlice';
 
 const Feed = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -13,16 +13,19 @@ const Feed = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const timelinePosts = await axios.get(
-        `/posts/timeline/${currentUser?._id}`
-      );
-      setPosts(timelinePosts.data);
-      
-      dispatch(fetchStart());
-      dispatch(fetchSuccess(timelinePosts.data));
-    };
-    fetchPosts();
+    try {
+      const fetchPosts = async () => {
+        dispatch(fetchStart());
+        const timelinePosts = await axios.get(
+          `/posts/timeline/${currentUser?._id}`
+        );
+        setPosts(timelinePosts.data);
+        dispatch(fetchSuccess(timelinePosts.data));
+      };
+      fetchPosts();
+    } catch (error) {
+      dispatch(fetchFailed(error));
+    }
   }, [currentUser?._id, dispatch]);
 
   return (
