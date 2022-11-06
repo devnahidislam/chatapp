@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const Profile = () => {
-    const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <>
